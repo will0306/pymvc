@@ -111,11 +111,12 @@ class Model(object):
 
     # @transaction              批量执行事务
     # @kw       list            执行的sql语句
-    def transaction(self, *kw):
+    def transaction(self, kw):
         if len(kw) > 0:
             try:
                 self.db_instance.begin()
                 for i in kw:
+                    log.info(i)
                     self.execute(i)
                     #self.db_cursor.execute(i)
                 self.db_instance.commit()
